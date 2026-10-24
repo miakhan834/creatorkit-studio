@@ -3,16 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CreatorKit — Scene Control Studio</title>
-    <meta name="description" content="From Idea to Editable Video Plan. Transform video topics into complete scripts, scene-by-scene visual prompts, voiceover text, and SRT subtitles for YouTube, TikTok, and Instagram." />
-    <meta property="og:title" content="CreatorKit — Scene Control Studio" />
-    <meta property="og:description" content="From Idea to Editable Video Plan. Transform video topics into complete scripts, scene-by-scene visual prompts, voiceover text, and SRT subtitles for YouTube, TikTok, and Instagram." />
+    <title>CreatorKit | AI Video Scripts &amp; Scene Planning for YouTube &amp; TikTok</title>
+    <meta name="description" content="Turn a topic into an editable video script, scene prompts and subtitles for YouTube and TikTok. Export TXT, JSON and SRT. Explore Free and Pro plans." />
+    <meta property="og:title" content="CreatorKit: AI Video Scripts &amp; Scene Planning" />
+    <meta property="og:description" content="From your first idea to an editable production plan. Scripts, scene prompts and TXT, JSON and SRT exports for creators." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/src/landing.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="/" aria-label="CreatorKit home"><span class="brand-mark" aria-hidden="true">C<span>k</span></span> CreatorKit<span class="studio-label">STUDIO</span></a>
+      <nav aria-label="Main navigation"><a href="#workflow">How it works</a><a href="#plans">Plans</a><a class="nav-studio" href="/studio.html">Open studio <span aria-hidden="true">↗</span></a></nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> THE PRE-PRODUCTION WORKSPACE</p>
+          <h1 id="hero-title">CreatorKit: AI Video Scripts &amp; Scene Planning for YouTube &amp; TikTok</h1>
+          <p class="intro">Your next video starts with a plan.</p>
+          <p class="description">Turn a topic into an editable script, scene-by-scene visual prompts, and subtitles. Keep the story in your hands, then take your plan to your favorite production tools.</p>
+          <div class="actions"><a class="button primary" href="/studio.html">Start planning for free <span aria-hidden="true">↗</span></a><a class="text-link" href="#workflow">See the workflow <span aria-hidden="true">↓</span></a></div>
+          <p class="small-note">3 free plans per day · No app account required</p>
+        </div>
+        <aside class="plan-preview" aria-label="Example video production plan">
+          <div class="preview-bar"><span>CREATORKIT / EXAMPLE PLAN</span><span class="preview-dots" aria-hidden="true">● ● ●</span></div>
+          <div class="preview-content"><p class="eyebrow">YOUTUBE SHORT · 3 SCENES</p><h2>A tiny balcony.<br>A greener morning.</h2><p class="preview-sub">Topic: starting a balcony herb garden</p>
+            <div class="scene"><span class="scene-number">01</span><div><h3>The hook</h3><p>“Your first herb garden only needs a pot, some light, and a little patience.”</p></div><span class="scene-tag">SCRIPT</span></div>
+            <div class="scene"><span class="scene-number">02</span><div><h3>Set the scene</h3><p>Close-up of hands planting basil in a terracotta pot. Soft morning light, vertical framing.</p></div><span class="scene-tag">PROMPT</span></div>
+            <div class="scene"><span class="scene-number">03</span><div><h3>Make it yours</h3><p>Edit the narration, refine the shots, and export your production plan.</p></div><span class="scene-tag">EDIT</span></div>
+            <div class="preview-footer"><span>READY FOR YOUR NEXT STEP</span><span>TXT / JSON / SRT</span></div>
+          </div>
+        </aside>
+      </section>
+      <div class="format-strip"><div class="wrap"><span>ONE IDEA. EVERY DETAIL.</span><p>Script <span aria-hidden="true">/</span> Visual prompts <span aria-hidden="true">/</span> Voiceover text <span aria-hidden="true">/</span> Subtitles</p></div></div>
+      <section class="workflow wrap section" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-heading"><p class="eyebrow">01 / THE WORKFLOW</p><h2 id="workflow-title">Less blank page.<br>More production-ready thinking.</h2><p>Topic → Script → Scene Prompts → Export TXT/JSON/SRT</p></div>
+        <ol class="steps">
+          <li><span class="step-number">01</span><div><h3>Bring a topic. Build a script.</h3><p>Choose your platform, language, style, and video length. Turn your idea into a hook, body, and conclusion, then edit the words to sound like you.</p></div></li>
+          <li><span class="step-number">02</span><div><h3>Shape every scene.</h3><p>Work through visual prompts, shot directions, and narration scene by scene. Lock your script while refining the visuals.</p></div></li>
+          <li><span class="step-number">03</span><div><h3>Export. Take it into production.</h3><p>Download scripts and prompts as TXT, a complete project as JSON, and subtitles as SRT. Use your preferred tools to create the visuals, record audio, and edit the finished video.</p></div></li>
+        </ol>
+      </section>
+      <section class="pricing-section" id="plans" aria-labelledby="plans-title"><div class="wrap section">
+        <div class="section-heading pricing-heading"><p class="eyebrow">02 / PICK YOUR PACE</p><h2 id="plans-title">Start with an idea.<br>Start for $0.</h2><p>Explore the studio with Free, or review the Pro option for more frequent planning.</p></div>
+        <div class="plans">
+          <article class="plan"><p class="eyebrow">FOR GETTING STARTED</p><h3>Free</h3><p class="price">$0 <span>/ free</span></p><p>Room to try your next idea.</p><ul><li>3 video plans per day</li><li>Editable scripts and scene prompts</li><li>TXT, JSON, and SRT exports</li><li>Projects saved in this browser</li></ul><a class="button primary" href="/studio.html">Open the free studio <span aria-hidden="true">↗</span></a></article>
+          <article class="plan pro"><p class="eyebrow">FOR MORE FREQUENT PLANNING</p><h3>Pro <span class="badge">PROTOTYPE</span></h3><p class="price">$20 <span>/ month</span></p><p>The advertised Pro plan removes daily planning limits.</p><ul><li>Unlimited video plans in Pro mode</li><li>The same editable planning workspace</li><li>Script, scene, and subtitle exports</li><li>Currently a browser-local demo upgrade</li></ul><a class="button secondary" href="/studio.html">Explore Pro in the studio <span aria-hidden="true">↗</span></a></article>
+        </div>
+        <p class="pricing-note"><strong>Current availability:</strong> Pro is shown at $20/month, but this prototype has no paid checkout or recurring subscription. The studio’s upgrade enables Pro mode in this browser only.</p>
+      </div></section>
+      <section class="questions wrap section" aria-labelledby="questions-title"><div class="section-heading"><p class="eyebrow">03 / BEFORE YOU START</p><h2 id="questions-title">A few useful answers.</h2></div><div class="answers"><details open><summary>Does CreatorKit create finished videos?</summary><p>CreatorKit creates editable video plans: scripts, visual prompts, voiceover text, and subtitle files. It does not render video or generate recorded voiceovers. Take the exported plan into your production tools to finish your video.</p></details><details><summary>Where are my projects saved?</summary><p>Projects are saved locally in your browser, without an app account. They do not sync across devices and can be lost if you clear site data. Export a JSON backup to keep a copy.</p></details><details><summary>What should I check before publishing?</summary><p>Review AI-generated scripts for accuracy, refine the prompts for your visual tools, and check subtitle timing against your final audio. The plan is a starting point you can edit.</p></details></div></section>
+    </main>
+    <footer class="site-footer wrap"><a class="brand" href="/">CreatorKit<span class="studio-label">STUDIO</span></a><p>From idea to editable video plan.</p><a href="/studio.html">Open studio <span aria-hidden="true">↗</span></a></footer>
   </body>
 </html>
-
