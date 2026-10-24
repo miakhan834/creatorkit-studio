@@ -8,6 +8,7 @@ import { ExportTab } from './components/ExportTab';
 import { NewProjectModal } from './components/NewProjectModal';
 import { DeleteConfirmModal } from './components/DeleteConfirmModal';
 import { PaywallModal } from './components/PaywallModal';
+import { AuthPage } from './components/AuthPage';
 import { ToastContainer, ToastMessage } from './components/Toast';
 import {
   ActiveTab,
@@ -16,6 +17,7 @@ import {
   SubtitleSegment,
   VideoScript,
 } from './types/creator';
+import { User } from './types/auth';
 import {
   getActiveProjectId,
   getSavedProjects,
@@ -24,6 +26,7 @@ import {
 } from './utils/storage';
 import { syncSubtitleTimings } from './utils/subtitles';
 import { getCreditsState, deductCredit, setProPlan } from './utils/credits';
+import { getCurrentUser, logoutUser } from './utils/auth';
 import { sampleProject } from './data/sampleProject';
 import {
   LayoutDashboard,
@@ -34,6 +37,9 @@ import {
 } from 'lucide-react';
 
 export default function App() {
+  // Authentication State
+  const [currentUser, setCurrentUser] = useState<User | null>(() => getCurrentUser());
+
   const [projects, setProjects] = useState<Project[]>(() => getSavedProjects());
   const [activeProjectId, setActiveId] = useState<string>(() =>
     getActiveProjectId(projects)
@@ -46,8 +52,17 @@ export default function App() {
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
 
-  // Freemium Credit State
-  const [creditsState, setCreditsState] = useState(() => getCreditsState());
+  // Freemium Credit State per user
+  const [creditsState, setCreditsState] = useState(() =>
+    getCreditsState(currentUser?.id)
+  );
+
+  // Sync credits if current user changes
+  useEffect(() => {
+    if (currentUser?.id) {
+      setCreditsState(getCreditsState(currentUser.id));
+    }
+  }, [currentUser]);
 
   // Toasts
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -68,6 +83,17 @@ export default function App() {
 
   const dismissToast = (id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  // Logout handler
+  const handleLogout = () => {
+    logoutUser();
+    setCurrentUser(null);
+    addToast({
+      type: 'info',
+      title: 'Signed Out',
+      message: 'You have been safely signed out of CreatorKit Studio.',
+    });
   };
 
   // Resolve active project
@@ -130,7 +156,7 @@ export default function App() {
   // Attempt to open New Project flow with Freemium Credit verification
   const handleAttemptCreateProject = () => {
     // Re-check credits in case date changed past midnight
-    const current = getCreditsState();
+    const current = getCreditsState(currentUser?.id);
     setCreditsState(current);
 
     if (current.isPro) {
@@ -139,9 +165,9 @@ export default function App() {
     }
 
     if (current.credits > 0) {
-      const allowed = deductCredit();
+      const allowed = deductCredit(currentUser?.id);
       if (allowed) {
-        const updated = getCreditsState();
+        const updated = getCreditsState(currentUser?.id);
         setCreditsState(updated);
         setIsNewModalOpen(true);
         addToast({
@@ -160,8 +186,8 @@ export default function App() {
 
   // Upgrade user to Pro plan with unlimited credits
   const handleUpgradeToPro = () => {
-    setProPlan(true);
-    const updated = getCreditsState();
+    setProPlan(true, currentUser?.id);
+    const updated = getCreditsState(currentUser?.id);
     setCreditsState(updated);
     setIsPaywallOpen(false);
     addToast({
@@ -297,6 +323,26 @@ export default function App() {
     );
   };
 
+  // If user is not logged in, render only the Login/Signup page
+  if (!currentUser) {
+    return (
+      <>
+        <AuthPage
+          onAuthSuccess={(user) => {
+            setCurrentUser(user);
+            setCreditsState(getCreditsState(user.id));
+            addToast({
+              type: 'success',
+              title: `Welcome, ${user.name}!`,
+              message: `Signed in as ${user.email}. You have 3 video plan credits available today.`,
+            });
+          }}
+        />
+        <ToastContainer toasts={toasts} onDismiss={dismissToast} />
+      </>
+    );
+  }
+
   // Mobile Bottom Nav items
   const mobileNavItems: { id: ActiveTab; label: string; icon: React.ElementType }[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -308,7 +354,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col selection:bg-purple-600 selection:text-white pb-16 md:pb-8">
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar with User Email, Credits, and Logout */}
       <Navbar
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -321,6 +367,8 @@ export default function App() {
         maxCredits={creditsState.maxCredits}
         isPro={creditsState.isPro}
         onOpenPaywall={() => setIsPaywallOpen(true)}
+        user={currentUser}
+        onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
