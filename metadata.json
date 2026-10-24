@@ -1,0 +1,6 @@
+{
+  "name": "CreatorKit — Scene Control Studio",
+  "description": "From Idea to Editable Video Plan. Transform video topics into complete scripts, scene-by-scene visual prompts, voiceover text, and SRT subtitles for YouTube, TikTok, and Instagram.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
